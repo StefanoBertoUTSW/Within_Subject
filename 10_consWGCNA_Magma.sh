@@ -9,7 +9,7 @@
 #write.table(out, file="gencode.v19.genes.out", quote=F, row.names = F, col.names = F)
 
 # Annotate with magma 
-#magma --annotate --gene-loc /U3/stefano/src/magma_v1.07/GENES/gencode.v19.genes.out --snp-loc /U3/stefano/src/magma_v1.07/BKG/g1000_eur/g1000_eur.bim --out /U3/stefano/src/magma_v1.07/GENES/hg19_gencodeV19_magma_annotation
+# magma --annotate --gene-loc gencode.v19.genes.out --snp-loc /magma_v1.07/BKG/g1000_eur/g1000_eur.bim --out /magma_v1.07/GENES/hg19_gencodeV19_magma_annotation
 
 # Run Magma on consWGCNA modules
 mkdir magma_wgcna/
@@ -67,21 +67,12 @@ magma --bfile /U3/stefano/src/magma_v1.07/BKG/g1000_eur/g1000_eur \
 --pval /U5/Stefano/GWAS_DATABASE/MDD2018_ex23andMe_ForMagma.bed N=307354 \
 --out MDD_2018
 
-# SCZ 108 Loci SNPs
-# PMID: 25056061
-# awk -v OFS="\t" '{print $2,$9}' 108loci.scz2snpres.bed | tail -n +2 > 108loci.scz2snpres_ForMagma.bed 
-magma --bfile /U3/stefano/src/magma_v1.07/BKG/g1000_eur/g1000_eur \
---gene-annot /U3/stefano/src/magma_v1.07/GENES/hg19_gencodeV19_magma_annotation.genes.annot \
---set-annot *.txt col=1,2 \
---pval /U5/Stefano/GWAS_DATABASE/108loci.scz2snpres_ForMagma.bed N=150064 \
---out SZ_2014
-
 # SCHIZOPHRENIA
 # PMID: 29906448
 magma --bfile /U3/stefano/src/magma_v1.07/BKG/g1000_eur/g1000_eur \
 --gene-annot /U3/stefano/src/magma_v1.07/GENES/hg19_gencodeV19_magma_annotation.genes.annot \
 --set-annot *.txt col=1,2 \
---pval /U5/Stefano/GWAS_DATABASE/SCZvsCONT.sumstats.bed N=53555 \
+--pval /U5/Stefano/GWAS_DATABASE/CLOZUK_PGC2.bed N=105318 \
 --out SZ_2018
 
 # EDUCATION ATTAINMENT
@@ -158,26 +149,3 @@ magma --bfile /U3/stefano/src/magma_v1.07/BKG/g1000_eur/g1000_eur \
 
 R CMD BATCH --vanilla GetDataTable.R
 R CMD BATCH --vanilla MAGMA_PLOT.R
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
